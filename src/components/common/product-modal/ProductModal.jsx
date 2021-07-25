@@ -1,6 +1,6 @@
 import { useStyle } from "./Styles";
 
-export const ProductListItem = () => {
+export const ProductModal = () => {
   const classes = useStyle();
   return <div></div>;
 };

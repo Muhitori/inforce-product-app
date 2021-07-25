@@ -1,6 +1,6 @@
 import { useStyle } from "./Styles";
 
-export const CreateProductModal = () => {
+export const Comment = () => {
   const classes = useStyle();
   return <div></div>;
 };
