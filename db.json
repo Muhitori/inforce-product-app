@@ -35,6 +35,12 @@
       "productId": 2,
       "description": "some text here 2",
       "date": "14:00 22.08.2021"
+    },
+    {
+      "id": 3,
+      "productId": 2,
+      "description": "some text here 3",
+      "date": "14:00 22.08.2021"
     }
   ]
 }

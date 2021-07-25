@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Grid } from "@material-ui/core";
-import { useStyle } from "./Styles";
 
 import { Product } from "../product/Product";
 
@@ -11,7 +10,6 @@ import { productsListSelector } from "../../../store/selectors";
 
 export const ProductList = () => {
   const dispatch = useDispatch();
-  const classes = useStyle();
 
   const products = useSelector(productsListSelector);
 

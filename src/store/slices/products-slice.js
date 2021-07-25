@@ -14,14 +14,26 @@ export const getAllProductsAsync = createAsyncThunk(
   }
 );
 
+export const getProductByIdAsync = createAsyncThunk(
+  "products/getById",
+  async ({ id }) => {
+    const data = await ProductsService.getById({ id });
+    return data;
+  }
+);
+
 export const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getAllProductsAsync.fulfilled, (state, action) => {
-      state.list = [...action.payload];
-    });
+    builder
+      .addCase(getAllProductsAsync.fulfilled, (state, action) => {
+        state.list = [...action.payload];
+      })
+      .addCase(getProductByIdAsync.fulfilled, (state, action) => {
+        state.currentProduct = { ...action.payload };
+      });
   },
 });
 

@@ -1,6 +1,13 @@
+import { Container } from "@material-ui/core";
 import { useStyle } from "./Styles";
 
-export const CommentsList = () => {
+import { Comment } from "../comment/Comment";
+
+export const CommentsList = ({ comments }) => {
   const classes = useStyle();
-  return <div></div>;
+
+  const renderComments = () =>
+    comments.map((comment) => <Comment key={comment.id} {...comment} />);
+
+  return <Container className={classes.root}>{renderComments()}</Container>;
 };
