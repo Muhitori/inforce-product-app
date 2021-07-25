@@ -8,4 +8,18 @@ export class CommentsService {
     );
     return response.data;
   }
+
+  static async create(productId, description) {
+    const response = await axios.post(this.COMMENTS_URL, {
+      productId,
+      description,
+      date: Date.now(),
+    });
+    return response.data;
+  }
+
+  static async delete(id) {
+    await axios.delete(`${this.COMMENTS_URL}/${id}`);
+    return id;
+  }
 }

@@ -3,8 +3,11 @@ import { useState } from "react";
 import { useStyle } from "./Styles";
 
 import { CommentsList } from "../comments-list/CommentsList";
+import { useDispatch } from "react-redux";
+import { createCommentAsync } from "../../../store/slices";
 
 export const CommentsSection = ({ productId, comments }) => {
+  const dispatch = useDispatch();
   const classes = useStyle();
 
   const [commentText, setCommentText] = useState("");
@@ -22,7 +25,11 @@ export const CommentsSection = ({ productId, comments }) => {
     e.preventDefault();
     if (!commentText) {
       setCommentError(true);
+      return;
     }
+
+    dispatch(createCommentAsync({ productId, description: commentText }));
+    setCommentText("");
   };
 
   return (

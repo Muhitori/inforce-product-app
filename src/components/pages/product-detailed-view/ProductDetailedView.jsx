@@ -12,8 +12,14 @@ import { useStyle } from "./Styles";
 
 import { CommentsSection } from "../../common/comments-section/CommentsSection";
 
-import { currentProductSelector } from "../../../store/selectors";
-import { getProductByIdAsync } from "../../../store/slices";
+import {
+  commentsListSelector,
+  currentProductSelector,
+} from "../../../store/selectors";
+import {
+  getCommentsByProductIdAsync,
+  getProductByIdAsync,
+} from "../../../store/slices";
 
 export const ProductDetailedView = () => {
   const dispatch = useDispatch();
@@ -26,11 +32,12 @@ export const ProductDetailedView = () => {
     count,
     size,
     weight,
-    comments,
   } = useSelector(currentProductSelector);
+  const comments = useSelector(commentsListSelector);
 
   useEffect(() => {
-    dispatch(getProductByIdAsync({ id }));
+    dispatch(getProductByIdAsync(id));
+    dispatch(getCommentsByProductIdAsync(id));
   }, []);
 
   return (

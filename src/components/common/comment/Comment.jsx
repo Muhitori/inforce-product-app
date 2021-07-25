@@ -1,9 +1,17 @@
 import { Container, Typography } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { useDispatch } from "react-redux";
+import { deleteCommentAsync } from "../../../store/slices";
 import { useStyle } from "./Styles";
 
 export const Comment = ({ id, description, date }) => {
+  const dispatch = useDispatch();
   const classes = useStyle();
+
+  const deleteComment = () => {
+    dispatch(deleteCommentAsync(id));
+  };
+
   return (
     <Container className={classes.root}>
       <Typography variant="body2" color="textPrimary" component="span">
@@ -11,8 +19,8 @@ export const Comment = ({ id, description, date }) => {
       </Typography>
       <Typography variant="body2" color="textPrimary" component="span">
         {date}
-      </Typography>{" "}
-      <DeleteIcon />
+      </Typography>
+      <DeleteIcon onClick={deleteComment} />
     </Container>
   );
 };
