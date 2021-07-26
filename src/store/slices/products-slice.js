@@ -8,8 +8,8 @@ const initialState = {
 
 export const getAllProductsAsync = createAsyncThunk(
   "products/getAll",
-  async () => {
-    const data = await ProductsService.getAll();
+  async ({ field, sortOption }) => {
+    const data = await ProductsService.getAll(field, sortOption);
     return data;
   }
 );
@@ -18,6 +18,22 @@ export const getProductByIdAsync = createAsyncThunk(
   "products/getById",
   async (id) => {
     const data = await ProductsService.getById(id);
+    return data;
+  }
+);
+
+export const createProductAsync = createAsyncThunk(
+  "products/create",
+  async (product) => {
+    const data = await ProductsService.create(product);
+    return data;
+  }
+);
+
+export const updateProductAsync = createAsyncThunk(
+  "products/update",
+  async ({ id, product }) => {
+    const data = await ProductsService.update(id, product);
     return data;
   }
 );
@@ -41,6 +57,17 @@ export const productsSlice = createSlice({
       })
       .addCase(getProductByIdAsync.fulfilled, (state, action) => {
         state.currentProduct = { ...action.payload };
+      })
+      .addCase(createProductAsync.fulfilled, (state, action) => {
+        state.list = [...state.list, action.payload];
+      })
+      .addCase(updateProductAsync.fulfilled, (state, action) => {
+        state.list = state.list.map((product) => {
+          if (product.id === action.payload.id) {
+            return action.payload;
+          }
+          return product;
+        });
       })
       .addCase(deleteProductAsync.fulfilled, (state, action) => {
         state.list = state.list.filter(

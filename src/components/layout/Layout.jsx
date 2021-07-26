@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { ProductList } from "../common/product-list/ProductList";
+import { ProductsPage } from "../pages/products-page/ProductsPage";
 import { ProductDetailedView } from "../pages/product-detailed-view/ProductDetailedView";
 
 export const Layout = () => {
@@ -7,7 +7,7 @@ export const Layout = () => {
     <Router>
       <Switch>
         <Route path="/:id" component={ProductDetailedView} />
-        <Route path="/" component={ProductList} />
+        <Route path="/" component={ProductsPage} />
       </Switch>
     </Router>
   );

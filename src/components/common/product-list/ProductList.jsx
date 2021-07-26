@@ -1,22 +1,7 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
 import { Grid } from "@material-ui/core";
-
 import { Product } from "../product/Product";
 
-import { getAllProductsAsync } from "../../../store/slices";
-import { productsListSelector } from "../../../store/selectors";
-
-export const ProductList = () => {
-  const dispatch = useDispatch();
-
-  const products = useSelector(productsListSelector);
-
-  useEffect(() => {
-    dispatch(getAllProductsAsync());
-  }, []);
-
+export const ProductList = ({ products }) => {
   const renderProducts = () =>
     products.map((product) => (
       <Grid key={product.id} item>
