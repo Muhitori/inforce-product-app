@@ -11,20 +11,20 @@ export const CommentsSection = ({ productId, comments }) => {
   const classes = useStyle();
 
   const [commentText, setCommentText] = useState("");
-  const [commentError, setCommentError] = useState(false);
+  const [hasCommentError, setHasCommentError] = useState(false);
 
   const onCommentInput = (e) => {
     setCommentText(e.target.value);
   };
 
   const onCommentFocus = () => {
-    setCommentError(false);
+    setHasCommentError(false);
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
     if (!commentText) {
-      setCommentError(true);
+      setHasCommentError(true);
       return;
     }
 
@@ -41,13 +41,13 @@ export const CommentsSection = ({ productId, comments }) => {
         autoComplete="off"
       >
         <TextField
-          error={commentError ? true : false}
+          error={hasCommentError ? true : false}
           value={commentText}
           onChange={onCommentInput}
           onFocus={onCommentFocus}
           id="standard-error-helper-text"
-          label={commentError ? "Error" : "Enter your comment"}
-          helperText={commentError ? "Empty comment" : ""}
+          label={hasCommentError ? "Error" : "Enter your comment"}
+          helperText={hasCommentError ? "Empty comment" : ""}
         />
       </form>
       {comments && <CommentsList comments={comments}></CommentsList>}

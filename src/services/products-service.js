@@ -11,4 +11,13 @@ export class ProductsService {
     const response = await axios.get(`${this.PRODUCTS_URL}/${id}`);
     return response.data;
   }
+
+  static async create(product) {}
+
+  static async update(product) {}
+
+  static async delete(id) {
+    await axios.delete(`${this.PRODUCTS_URL}/${id}`);
+    return id;
+  }
 }
