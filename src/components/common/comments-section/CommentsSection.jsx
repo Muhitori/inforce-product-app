@@ -41,11 +41,12 @@ export const CommentsSection = ({ productId, comments }) => {
         autoComplete="off"
       >
         <TextField
+          className={classes.commentField}
+          variant="outlined"
           error={hasCommentError ? true : false}
           value={commentText}
           onChange={onCommentInput}
           onFocus={onCommentFocus}
-          id="standard-error-helper-text"
           label={hasCommentError ? "Error" : "Enter your comment"}
           helperText={hasCommentError ? "Empty comment" : ""}
         />

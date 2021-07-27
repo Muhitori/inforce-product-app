@@ -9,4 +9,8 @@ export const useStyle = makeStyles({
   formStyles: {
     textAlign: "center",
   },
+  commentField: {
+    width: "50%",
+    marginTop: "2%",
+  },
 });
