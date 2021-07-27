@@ -1,16 +1,33 @@
 import { Button, Container } from "@material-ui/core";
+import { useState } from "react";
 import { useStyle } from "./Styles";
-import { ProductList } from "../../common/product-list/ProductList";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
-import { getAllProductsAsync } from "../../../store/slices";
+import { createProductAsync, getAllProductsAsync } from "../../../store/slices";
 import { productsListSelector } from "../../../store/selectors";
-import { useState } from "react";
+
+import { ProductModal } from "../../common/product-modal/ProductModal";
+import { ProductList } from "../../common/product-list/ProductList";
+
+const defaultProduct = {
+  imageUrl: "",
+  name: "",
+  count: 0,
+  size: {
+    width: 0,
+    height: 0,
+  },
+  weight: 0,
+};
 
 export const ProductsPage = () => {
   const dispatch = useDispatch();
   const classes = useStyle();
+
+  const [isOpenProductModal, setIsOpenProductModal] = useState(false);
+  const [newProduct, setNewProduct] = useState(defaultProduct);
+
   const [sortByNameOptions, setSortByNameOptions] = useState({
     field: "name",
     sortOption: "asc",
@@ -22,56 +39,82 @@ export const ProductsPage = () => {
 
   const products = useSelector(productsListSelector);
 
+  const getSortOption = (sortOption) => (sortOption === "asc" ? "desc" : "asc");
+
+  const updateSortOption = (sortOptions, setSortOptions) => {
+    setSortOptions({
+      ...sortOptions,
+      sortOption: getSortOption(sortOptions.sortOption),
+    });
+  };
+
   useEffect(() => {
     dispatch(getAllProductsAsync(sortByNameOptions));
-    setSortByNameOptions({
-      ...sortByNameOptions,
-      sortOption: getSortOption(sortByNameOptions.sortOption),
-    });
+    updateSortOption(sortByNameOptions, setSortByNameOptions);
   }, []);
-
-  const getSortOption = (sortOption) => (sortOption === "asc" ? "desc" : "asc");
 
   const sortByName = () => {
     dispatch(getAllProductsAsync(sortByNameOptions));
-    setSortByNameOptions({
-      ...sortByNameOptions,
-      sortOption: getSortOption(sortByNameOptions.sortOption),
-    });
+    updateSortOption(sortByNameOptions, setSortByNameOptions);
   };
 
   const sortByCount = () => {
     dispatch(getAllProductsAsync(sortByCountOptions));
-    setSortByCountOptions({
-      ...sortByCountOptions,
-      sortOption: getSortOption(sortByCountOptions.sortOption),
-    });
+    updateSortOption(sortByCountOptions, setSortByCountOptions);
+  };
+
+  const openProductModal = () => {
+    setIsOpenProductModal(true);
+  };
+
+  const closeProductModal = () => {
+    setIsOpenProductModal(false);
+  };
+
+  const addProduct = (product) => {
+    dispatch(createProductAsync(product));
+    setNewProduct(defaultProduct);
+    setIsOpenProductModal(false);
   };
 
   return (
-    <Container>
-      <Container className={classes.header}>
-        <Button className={classes.button} variant="contained" color="primary">
-          Add new Product
-        </Button>
-        <Button
-          className={classes.button}
-          variant="contained"
-          color="primary"
-          onClick={sortByName}
-        >
-          Sort by name
-        </Button>
-        <Button
-          className={classes.button}
-          variant="contained"
-          color="primary"
-          onClick={sortByCount}
-        >
-          Sort by count
-        </Button>
+    <>
+      <Container>
+        <Container className={classes.header}>
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            onClick={openProductModal}
+          >
+            Add new Product
+          </Button>
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            onClick={sortByName}
+          >
+            Sort by name
+          </Button>
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            onClick={sortByCount}
+          >
+            Sort by count
+          </Button>
+        </Container>
+        <ProductList products={products}></ProductList>
       </Container>
-      <ProductList products={products}></ProductList>
-    </Container>
+      <ProductModal
+        open={isOpenProductModal}
+        onClose={closeProductModal}
+        mode={"Add"}
+        onConfirm={addProduct}
+        product={newProduct}
+      />
+    </>
   );
 };

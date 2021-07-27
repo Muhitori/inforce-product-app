@@ -1,4 +1,5 @@
 import axios from "axios";
+import moment from "moment";
 export class CommentsService {
   static COMMENTS_URL = "http://localhost:3010/comments";
 
@@ -13,7 +14,7 @@ export class CommentsService {
     const response = await axios.post(this.COMMENTS_URL, {
       productId,
       description,
-      date: Date.now(),
+      date: moment().format("MMMM Do YYYY, h:mm:ss a"),
     });
     return response.data;
   }

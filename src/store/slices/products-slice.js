@@ -53,15 +53,16 @@ export const productsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getAllProductsAsync.fulfilled, (state, action) => {
-        state.list = [...action.payload];
+        state.list = action.payload;
       })
       .addCase(getProductByIdAsync.fulfilled, (state, action) => {
-        state.currentProduct = { ...action.payload };
+        state.currentProduct = action.payload;
       })
       .addCase(createProductAsync.fulfilled, (state, action) => {
         state.list = [...state.list, action.payload];
       })
       .addCase(updateProductAsync.fulfilled, (state, action) => {
+        state.currentProduct = action.payload;
         state.list = state.list.map((product) => {
           if (product.id === action.payload.id) {
             return action.payload;

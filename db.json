@@ -18,9 +18,9 @@
       "count": 2,
       "size": {
         "width": 200,
-        "height": 200
+        "height": "200"
       },
-      "weight": "200g"
+      "weight": "500g"
     }
   ],
   "comments": [

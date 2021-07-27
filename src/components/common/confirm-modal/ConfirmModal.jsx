@@ -4,12 +4,7 @@ import { Button, Modal } from "@material-ui/core";
 export const ConfirmModal = ({ open, onClose, productTitle, onConfirm }) => {
   const classes = useStyle();
   return (
-    <Modal
-      open={open}
-      onClose={onClose}
-      aria-labelledby="simple-modal-title"
-      aria-describedby="simple-modal-description"
-    >
+    <Modal open={open} onClose={onClose}>
       <div className={classes.modal}>
         <h2 className={classes.title}>Delete {productTitle}?</h2>
         <Button

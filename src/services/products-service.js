@@ -3,7 +3,6 @@ export class ProductsService {
   static PRODUCTS_URL = "http://localhost:3010/products";
 
   static async getAll(field, sortOption) {
-    console.log(`${this.PRODUCTS_URL}?_sort=${field}&_order=${sortOption}`);
     const response = await axios.get(
       `${this.PRODUCTS_URL}?_sort=${field}&_order=${sortOption}`
     );
