@@ -15,7 +15,7 @@
       "id": 2,
       "imageUrl": "https://images8.alphacoders.com/926/926492.jpg",
       "name": "Product name 2",
-      "count": 2,
+      "count": "1",
       "size": {
         "width": 200,
         "height": "200"
@@ -24,8 +24,8 @@
     },
     {
       "imageUrl": "https://wallpapercave.com/wp/wp6934527.jpg",
-      "name": "asfsafdasfsgfg",
-      "count": "1",
+      "name": "Product name 3",
+      "count": "2",
       "size": {
         "width": "44",
         "height": "22"
@@ -43,8 +43,8 @@
     },
     {
       "productId": "3",
-      "description": "dasfsafg",
-      "date": "July 27th 2021, 12:17:16 pm",
+      "description": "comment",
+      "date": "July 27th 2021, 12:40:43 pm",
       "id": 2
     }
   ]
