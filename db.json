@@ -32,6 +32,17 @@
       },
       "weight": "500g",
       "id": 3
+    },
+    {
+      "imageUrl": "https://img1.goodfon.ru/wallpaper/nbig/8/87/abstrakciya-color-abstract-128.jpg",
+      "name": "Product name 4",
+      "count": "2",
+      "size": {
+        "width": "33",
+        "height": "44"
+      },
+      "weight": "100g",
+      "id": 4
     }
   ],
   "comments": [

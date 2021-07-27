@@ -4,7 +4,7 @@ export class CommentsService {
   static COMMENTS_URL =
     process.env.NODE_ENV === "development"
       ? "http://localhost:3010/products"
-      : "https://inforce-app.herokuapp.com:3010/products";
+      : `https://inforce-app.herokuapp.com:${process.env.PORT}/comments`;
 
   static async getByProductId(productId) {
     const response = await axios.get(

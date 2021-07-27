@@ -3,7 +3,7 @@ export class ProductsService {
   static PRODUCTS_URL =
     process.env.NODE_ENV === "development"
       ? "http://localhost:3010/products"
-      : "https://inforce-app.herokuapp.com:3010/products";
+      : `https://inforce-app.herokuapp.com:${process.env.PORT}/products`;
 
   static async getAll(field, sortOption) {
     const response = await axios.get(
