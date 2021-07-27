@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 const ValidationSchema = Yup.object().shape({
-  name: Yup.string().max(50, "Too Long!").required("Required"),
+  name: Yup.string().max(20, "Too Long!").required("Required"),
   imageUrl: Yup.string().max(200, "Too Long!").required("Required"),
   count: Yup.number("Must be a number!")
     .positive("Must be positive!")
